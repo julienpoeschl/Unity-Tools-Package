@@ -9,14 +9,15 @@ namespace Tools
 
     public static class CustomScriptTemplates
     {
+        private static string root = "Packages";
+        private static string packageRuntimeDir = Path.Combine("com.julienpoeschl.tools", "Runtime");
+        private static string defaultAssetName = "NewScriptTemplate.asset";
+        private static string templateDir = Path.Combine(root, packageRuntimeDir, "Custom Script Templates", "Script Templates");
+
         [MenuItem("Tools/Custom Scripts/Create Script Template", priority = 50)]
         public static void CreateScriptTemplate()
         {
-            string root = "Assets";
-            string directory = "Script Templates";
-            string defaultAssetName = "NewScriptTemplate.asset";
-
-            string path = AssetDatabase.GenerateUniqueAssetPath(Path.Combine(root, "Tools", "Custom Script Templates", directory, defaultAssetName));
+            string path = AssetDatabase.GenerateUniqueAssetPath(Path.Combine(templateDir, defaultAssetName));
 
             CreateAsset action = ScriptableObject.CreateInstance<CreateAsset>();
             action.Init(typeof(ScriptTemplate));
@@ -29,8 +30,6 @@ namespace Tools
             null
             );
         }
-
-        private static string templatePath = Path.Combine("Assets", "Tools", "Custom Script Templates", "Script Templates");
 
         private static void CreateScript(string templatePath)
         {
@@ -66,7 +65,7 @@ namespace Tools
 
         #region MonoBehaviour
 
-        private static string monoBehaviourTemplatePath = Path.Combine(templatePath, "MonoBehaviourTemplate.asset");
+        private static string monoBehaviourTemplatePath = Path.Combine(templateDir, "MonoBehaviourTemplate.asset");
         [MenuItem("Assets/Create/Scripts/MonoBehaviour", false, 0)]
         public static void CreateMonoBehaviourScript()
         {
@@ -77,7 +76,7 @@ namespace Tools
 
         #region Manager
 
-        private static string managerTemplatePath = Path.Combine(templatePath, "ManagerTemplate.asset");
+        private static string managerTemplatePath = Path.Combine(templateDir, "ManagerTemplate.asset");
         [MenuItem("Assets/Create/Scripts/Manager", false, 1)]
         public static void CreateManagerScript()
         {
@@ -88,7 +87,7 @@ namespace Tools
 
         #region Scriptable Object
 
-        private static string scriptableObjectTemplatePath = Path.Combine(templatePath, "ScriptableObjectTemplate.asset");
+        private static string scriptableObjectTemplatePath = Path.Combine(templateDir, "ScriptableObjectTemplate.asset");
         [MenuItem("Assets/Create/Scripts/Scriptable Object", false, 3)]
         public static void CreateScriptableObjectScript()
         {
@@ -98,7 +97,7 @@ namespace Tools
         #endregion
 
         #region Class
-        private static string classTemplatePath = Path.Combine(templatePath, "ClassTemplate.asset");
+        private static string classTemplatePath = Path.Combine(templateDir, "ClassTemplate.asset");
         [MenuItem("Assets/Create/Scripts/Class", false, 4)]
         public static void CreateClassScript()
         {
@@ -110,7 +109,6 @@ namespace Tools
 
         private static string GetSelectedPathOrFallback()
         {
-            string root = "Assets";
             string path = root;
             foreach (UnityEngine.Object obj in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
             {
