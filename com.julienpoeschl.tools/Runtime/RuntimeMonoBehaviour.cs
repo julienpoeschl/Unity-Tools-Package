@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace packagename
+namespace Tools
 {
     public class RuntimeMonoBehaviour : MonoBehaviour
     {
@@ -185,3 +185,4 @@ namespace packagename
     
     }
 }
+

@@ -1,7 +1,7 @@
 {
-  "name": "com.yourname.package.editor",
+  "name": "com.julienpoeschl.package.editor",
   "references": [
-    "com.yourname.package.runtime"
+    "com.julienpoeschl.package.runtime"
   ],
   "includePlatforms": [
     "Editor"

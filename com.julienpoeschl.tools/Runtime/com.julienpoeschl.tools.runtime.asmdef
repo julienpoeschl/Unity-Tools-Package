@@ -1,5 +1,5 @@
 {
-  "name": "com.yourname.packagename.runtime",
+  "name": "com.julienpoeschl.tools.runtime",
   "references": [],
   "includePlatforms": [],
   "excludePlatforms": [],
