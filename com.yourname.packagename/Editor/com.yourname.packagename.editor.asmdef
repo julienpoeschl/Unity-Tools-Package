@@ -1,0 +1,10 @@
+{
+  "name": "com.yourname.package.editor",
+  "references": [
+    "com.yourname.package.runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "autoReferenced": true
+}
