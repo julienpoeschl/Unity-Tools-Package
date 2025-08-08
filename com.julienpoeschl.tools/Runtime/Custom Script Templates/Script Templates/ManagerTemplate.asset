@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6297578074575141bba7ec0bd9a26c4, type: 3}
   m_Name: ManagerTemplate
   m_EditorClassIdentifier: 
-  DefaultName: 
-  Template: 
+  DefaultName: Manager.cs
+  Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\npublic
+    class ClassName : MonoBehaviour\r\n{\r\n    public static ClassName Instance;\r\n\r\n   
+    void Awake()\r\n    {\r\n        if (Instance != null)\r\n        {\r\n           
+    Debug.LogWarning($\"Destroyed duplicate {this.name} Manager.\");\r\n           
+    Destroy(gameObject);\r\n        }\r\n\r\n        Instance = this;\r\n       
+    DontDestroyOnLoad(gameObject);\r\n    }\r\n}\r\n"
