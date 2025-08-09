@@ -10,9 +10,9 @@ namespace Tools
     public static class CustomScriptTemplates
     {
         private static string root = "Packages";
-        private static string packageRuntimeDir = Path.Combine("com.julienpoeschl.tools", "Runtime");
+        private static string packageRuntimeDir = Path.Combine("Tools", "Runtime");
         private static string defaultAssetName = "NewScriptTemplate.asset";
-        private static string templateDir = Path.Combine(root, packageRuntimeDir, "Custom Script Templates", "Script Templates");
+        private static string templateDir = Path.Combine(root, packageRuntimeDir, "Custom Script Templates");
 
         [MenuItem("Tools/Custom Scripts/Create Script Template", priority = 50)]
         public static void CreateScriptTemplate()
