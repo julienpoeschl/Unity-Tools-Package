@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6297578074575141bba7ec0bd9a26c4, type: 3}
-  m_Name: AbstractScriptableObject
+  m_Name: AbstractScriptableObjectTemplate
   m_EditorClassIdentifier: 
   DefaultName: AbstractSO.cs
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\r\npublic
-    abstract class ClassName : ScriptableObject\r\n{\r\n\r\n\r\t\n}\r\n"
+    abstract class Name : ScriptableObject\r\n{\r\n\r\n\r\t\n}\r\n"

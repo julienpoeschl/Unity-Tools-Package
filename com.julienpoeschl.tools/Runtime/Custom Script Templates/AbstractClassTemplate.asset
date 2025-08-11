@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6297578074575141bba7ec0bd9a26c4, type: 3}
   m_Name: AbstractClassTemplate
   m_EditorClassIdentifier: 
-  DefaultName: Abstract.cs
+  DefaultName: AbstractClass.cs
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\npublic
-    abstract class ClassName : MonoBehaviour\r\n{\r\n\r\n    public ClassName()\r\n   
-    {\r\n\r\n    }\r\n}\r\n"
+    abstract class Name : MonoBehaviour\r\n{\r\n\r\n    public Name()\r\n    {\r\n\r\n   
+    }\r\n}\r\n"

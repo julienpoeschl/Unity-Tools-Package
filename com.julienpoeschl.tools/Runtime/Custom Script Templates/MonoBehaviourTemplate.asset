@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6297578074575141bba7ec0bd9a26c4, type: 3}
   m_Name: MonoBehaviourTemplate
   m_EditorClassIdentifier: 
-  DefaultName: NewMonoBehaviour.cs
+  DefaultName: MonoBehaviour.cs
   Template: "using UnityEditor;\r\nusing UnityEngine;\r\n\r\n/// <summary>\r\n///
-    \r\n/// </summary>\r\npublic class ClassName : MonoBehaviour\r\n{\r\n\r\n   
-    void Awake()\r\n    {\r\n\r\n    }\r\n}\r\n"
+    \r\n/// </summary>\r\npublic class Name : MonoBehaviour\r\n{\r\n\r\n    void
+    Awake()\r\n    {\r\n\r\n    }\r\n}\r\n"

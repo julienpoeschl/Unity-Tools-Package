@@ -9,10 +9,12 @@ namespace Tools
 
     public static class CustomScriptTemplates
     {
+
         private static string root = "Packages";
-        private static string packageRuntimeDir = Path.Combine("Tools", "Runtime");
-        private static string defaultAssetName = "NewScriptTemplate.asset";
+        private static string packageRuntimeDir = Path.Combine("com.julienpoeschl.tools", "Runtime");
+        private static string defaultAssetName = $"NewScript{templateAssetSuffix}";
         private static string templateDir = Path.Combine(root, packageRuntimeDir, "Custom Script Templates");
+        private const string templateAssetSuffix = "Template.asset";
 
         [MenuItem("Tools/Custom Scripts/Create Script Template", priority = 50)]
         public static void CreateScriptTemplate()
@@ -65,18 +67,25 @@ namespace Tools
 
         #region MonoBehaviour
 
-        private static string monoBehaviourTemplatePath = Path.Combine(templateDir, "MonoBehaviourTemplate.asset");
+        private static string monoBehaviourTemplatePath = Path.Combine(templateDir, $"MonoBehaviour{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/MonoBehaviour", false, 0)]
         public static void CreateMonoBehaviourScript()
         {
             CreateScript(monoBehaviourTemplatePath);
         }
 
+        private static string abstractMonoBehaviourTemplatePath = Path.Combine(templateDir, $"AbstractMonoBehaviour{templateAssetSuffix}");
+        [MenuItem("Assets/Create/Scripts/Abstract/MonoBehaviour", false, 0)]
+        public static void CreateAbstractMonoBehaviourScript()
+        {
+            CreateScript(abstractMonoBehaviourTemplatePath);
+        }
+
         #endregion
 
         #region Manager
 
-        private static string managerTemplatePath = Path.Combine(templateDir, "ManagerTemplate.asset");
+        private static string managerTemplatePath = Path.Combine(templateDir, $"Manager{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Manager", false, 1)]
         public static void CreateManagerScript()
         {
@@ -87,24 +96,62 @@ namespace Tools
 
         #region Scriptable Object
 
-        private static string scriptableObjectTemplatePath = Path.Combine(templateDir, "ScriptableObjectTemplate.asset");
+        private static string scriptableObjectTemplatePath = Path.Combine(templateDir, $"ScriptableObject{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Scriptable Object", false, 3)]
         public static void CreateScriptableObjectScript()
         {
             CreateScript(scriptableObjectTemplatePath);
         }
 
+        private static string abstractScriptableObjectTemplatePath = Path.Combine(templateDir, $"AbstractScriptableObject{templateAssetSuffix}");
+        [MenuItem("Assets/Create/Scripts/Abstract/Scriptable Object", false, 3)]
+        public static void CreateAbstractScriptableObjectScript()
+        {
+            CreateScript(abstractScriptableObjectTemplatePath);
+        }
+
         #endregion
 
         #region Class
-        private static string classTemplatePath = Path.Combine(templateDir, "ClassTemplate.asset");
+        private static string classTemplatePath = Path.Combine(templateDir, $"Class{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Class", false, 4)]
         public static void CreateClassScript()
         {
             CreateScript(classTemplatePath);
         }
 
+        private static string abstractClassTemplatePath = Path.Combine(templateDir, $"AbstractClass{templateAssetSuffix}");
+        [MenuItem("Assets/Create/Scripts/Abstract/Class", false, 4)]
+        public static void CreateAbstractClassScript()
+        {
+            CreateScript(abstractClassTemplatePath);
+        }
+
         #endregion
+
+        #region Interface
+
+        private static string interfaceTemplatePath = Path.Combine(templateDir, $"Interface{templateAssetSuffix}");
+        private const string menuItem = "";
+        [MenuItem("Assets/Create/Scripts/Interface", false, 4)]
+        public static void CreateInterfaceScript()
+        {
+            CreateScript(interfaceTemplatePath);
+        }
+
+        #endregion
+        
+        #region Enum
+
+        private static string enumTemplatePath = Path.Combine(templateDir, $"Enum{templateAssetSuffix}");
+        [MenuItem("Assets/Create/Scripts/Enum", false, 4)]
+        public static void CreateEnumScript()
+        {
+            CreateScript(enumTemplatePath);
+        }
+
+        #endregion
+
 
 
         private static string GetSelectedPathOrFallback()
@@ -149,6 +196,8 @@ namespace Tools
     public class CreateScriptFromTemplateAction : EndNameEditAction
     {
         private ScriptTemplate scriptTemplate;
+        private const string templateNamePlaceholder = "Name";
+        private const string extension = ".cs";
 
         public void Init(ScriptTemplate template)
         {
@@ -157,13 +206,17 @@ namespace Tools
 
         public override void Action(int instanceId, string pathName, string resourceFile)
         {
-            string className = Path.GetFileNameWithoutExtension(pathName);
-            string code = scriptTemplate.Template.Replace("ClassName", className);
+            if (pathName == string.Empty) pathName = scriptTemplate.DefaultName;
+
+            string name = Path.GetFileNameWithoutExtension(pathName);
+            string code = scriptTemplate.Template.Replace(templateNamePlaceholder, name);
 
             File.WriteAllText(pathName, code);
             AssetDatabase.Refresh();
 
-            var asset = AssetDatabase.LoadAssetAtPath<MonoScript>(pathName);
+            if (string.IsNullOrEmpty(Path.GetExtension(pathName))) pathName += extension;
+
+            MonoScript asset = AssetDatabase.LoadAssetAtPath<MonoScript>(pathName);
             ProjectWindowUtil.ShowCreatedAsset(asset);
         }
     }

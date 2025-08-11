@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6297578074575141bba7ec0bd9a26c4, type: 3}
   m_Name: ClassTemplate
   m_EditorClassIdentifier: 
-  DefaultName: .cs
+  DefaultName: Class.cs
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\npublic
     class ClassName\r\n{\r\n\r\n    public ClassName()\r\n    {\r\n\r\n    }\r\n}\r\n"
