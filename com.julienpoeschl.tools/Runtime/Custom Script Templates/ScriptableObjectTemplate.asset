@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultName: SO.cs
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\n[CreateAssetMenu(fileName
-    = \"Name\", menuName = \"Name/Name\", order = 0)]\r\npublic class Name : ScriptableObject\r\n{\r\n\r\n\r\n}\r\n"
+    = \"FileName\", menuName = \"FileName/FileName\", order = 0)]\r\npublic class
+    FileName : ScriptableObject\r\n{\r\n\r\n\r\n}\r\n"

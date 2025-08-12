@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultName: AbstractClass.cs
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\npublic
-    abstract class Name : MonoBehaviour\r\n{\r\n\r\n    public Name()\r\n    {\r\n\r\n   
-    }\r\n}\r\n"
+    abstract class FileName : MonoBehaviour\r\n{\r\n\r\n    public FileName()\r\n   
+    {\r\n\r\n    }\r\n}\r\n"

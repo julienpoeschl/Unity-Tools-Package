@@ -196,7 +196,7 @@ namespace Tools
     public class CreateScriptFromTemplateAction : EndNameEditAction
     {
         private ScriptTemplate scriptTemplate;
-        private const string templateNamePlaceholder = "Name";
+        private const string templateNamePlaceholder = "FileName";
         private const string extension = ".cs";
 
         public void Init(ScriptTemplate template)

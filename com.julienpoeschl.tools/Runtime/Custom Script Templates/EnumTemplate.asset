@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultName: Enum.cs
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\r\npublic
-    enum Name\r\n{\r\n\r\n\r\t\n}\r\n"
+    enum FileName\r\n{\r\n\r\n\r\t\n}\r\n"
