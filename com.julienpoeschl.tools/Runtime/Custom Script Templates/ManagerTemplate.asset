@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultName: Manager.cs
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\npublic
-    class FileName : MonoBehaviour\r\n{\r\n    public static FileName Instance;\r\n\r\n   
-    void Awake()\r\n    {\r\n        if (Instance != null)\r\n        {\r\n           
-    Debug.LogWarning($\"Destroyed duplicate {this.name} Manager.\");\r\n           
-    Destroy(gameObject);\r\n        }\r\n\r\n        Instance = this;\r\n       
-    DontDestroyOnLoad(gameObject);\r\n    }\r\n}\r\n"
+    class FileName : MonoBehaviour\r\n{\r\n    public static FileName Instance  {
+    get; private set; }\r\n\r\n    void Awake()\r\n    {\r\n        if (Instance
+    != null)\r\n        {\r\n            Debug.LogWarning($\"Destroyed duplicate
+    {this.name} Manager.\");\r\n            Destroy(gameObject);\r\n        }\r\n\r\n       
+    Instance = this;\r\n        DontDestroyOnLoad(gameObject);\r\n    }\r\n}\r\n"
