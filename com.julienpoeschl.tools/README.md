@@ -1,9 +1,4 @@
 # Structure
-This package is split up into
-- Documentation
-- Editor
-- Runtime
-
 ## Documentation
 Contains a detailed explanation on how to use the functionality of this package and how to extend it with your own functionality.
 
@@ -12,3 +7,6 @@ Contains simple editor scripts ment to improve the visual fidelity of the packag
 
 ## Runtime
 Contains the actual functionality of the package, meaning scripts, scriptable object instances and more.
+
+# How to use
+-
