@@ -7,7 +7,7 @@ using System;
 namespace Tools
 {
 
-    public static class CustomScriptTemplates
+    public static class ScriptTemplateMenuItem
     {
 
         private static string root = "Packages";
@@ -118,6 +118,13 @@ namespace Tools
         public static void CreateClassScript()
         {
             CreateScript(classTemplatePath);
+        }
+
+        private static string staticClassTemplatePath = Path.Combine(templateDir, $"StaticClass{templateAssetSuffix}");
+        [MenuItem("Assets/Create/Scripts/Static Class", false, 4)]
+        public static void CreateStaticClassScript()
+        {
+            CreateScript(staticClassTemplatePath);
         }
 
         private static string abstractClassTemplatePath = Path.Combine(templateDir, $"AbstractClass{templateAssetSuffix}");
