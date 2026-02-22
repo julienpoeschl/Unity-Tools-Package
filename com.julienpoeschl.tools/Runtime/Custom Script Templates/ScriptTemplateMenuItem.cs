@@ -10,10 +10,10 @@ namespace Tools
     public static class ScriptTemplateMenuItem
     {
 
-        private static string root = "Packages";
-        private static string packageRuntimeDir = Path.Combine("com.julienpoeschl.tools", "Runtime");
-        private static string defaultAssetName = $"NewScript{templateAssetSuffix}";
-        private static string templateDir = Path.Combine(root, packageRuntimeDir, "Custom Script Templates");
+        private static readonly string root = "Packages";
+        private static readonly string packageRuntimeDir = Path.Combine("com.julienpoeschl.tools", "Runtime");
+        private static readonly string defaultAssetName = $"NewScript{templateAssetSuffix}";
+        private static readonly string templateDir = Path.Combine(root, packageRuntimeDir, "Custom Script Templates");
         private const string templateAssetSuffix = "Template.asset";
 
         [MenuItem("Tools/Custom Scripts/Create Script Template", priority = 50)]
@@ -21,8 +21,7 @@ namespace Tools
         {
             string path = AssetDatabase.GenerateUniqueAssetPath(Path.Combine(templateDir, defaultAssetName));
 
-            CreateAsset action = ScriptableObject.CreateInstance<CreateAsset>();
-            action.Init(typeof(ScriptTemplate));
+            EndAssetAction action = CreateAction<EndAssetAction, Type>.Retreive(typeof(ScriptTemplate));
 
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
             0,
@@ -32,6 +31,8 @@ namespace Tools
             null
             );
         }
+
+        
 
         private static void CreateScript(string templatePath)
         {
@@ -49,32 +50,33 @@ namespace Tools
                 return;
             }
 
-            var action = ScriptableObject.CreateInstance<CreateScriptFromTemplateAction>();
-            action.Init(template);
+            EndScriptTemplateAction action = CreateAction<EndScriptTemplateAction, ScriptTemplate>.Retreive(template);
 
             string defaultName = template.DefaultName;
-            if (!defaultName.EndsWith(".cs"))
-                defaultName += ".cs";
+            if (!defaultName.EndsWith(template.Extension))
+                defaultName += template.Extension;
+
+            Texture2D icon = template.Icon != null ? template.Icon : EditorGUIUtility.IconContent(template.GetIconName()).image as Texture2D;
 
             ProjectWindowUtil.StartNameEditingIfProjectWindowExists(
                 0,
                 action,
                 Path.Combine(GetSelectedPathOrFallback(), defaultName),
-                EditorGUIUtility.IconContent("cs Script Icon").image as Texture2D,
+                icon,
                 null
             );   
         }
 
         #region MonoBehaviour
 
-        private static string monoBehaviourTemplatePath = Path.Combine(templateDir, $"MonoBehaviour{templateAssetSuffix}");
+        private static readonly string monoBehaviourTemplatePath = Path.Combine(templateDir, $"MonoBehaviour{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/MonoBehaviour", false, 0)]
         public static void CreateMonoBehaviourScript()
         {
             CreateScript(monoBehaviourTemplatePath);
         }
 
-        private static string abstractMonoBehaviourTemplatePath = Path.Combine(templateDir, $"AbstractMonoBehaviour{templateAssetSuffix}");
+        private static readonly string abstractMonoBehaviourTemplatePath = Path.Combine(templateDir, $"AbstractMonoBehaviour{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Abstract/MonoBehaviour", false, 0)]
         public static void CreateAbstractMonoBehaviourScript()
         {
@@ -85,7 +87,7 @@ namespace Tools
 
         #region Manager
 
-        private static string managerTemplatePath = Path.Combine(templateDir, $"Manager{templateAssetSuffix}");
+        private static readonly string managerTemplatePath = Path.Combine(templateDir, $"Manager{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Manager", false, 1)]
         public static void CreateManagerScript()
         {
@@ -96,14 +98,14 @@ namespace Tools
 
         #region Scriptable Object
 
-        private static string scriptableObjectTemplatePath = Path.Combine(templateDir, $"ScriptableObject{templateAssetSuffix}");
+        private static readonly string scriptableObjectTemplatePath = Path.Combine(templateDir, $"ScriptableObject{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Scriptable Object", false, 3)]
         public static void CreateScriptableObjectScript()
         {
             CreateScript(scriptableObjectTemplatePath);
         }
 
-        private static string abstractScriptableObjectTemplatePath = Path.Combine(templateDir, $"AbstractScriptableObject{templateAssetSuffix}");
+        private static readonly string abstractScriptableObjectTemplatePath = Path.Combine(templateDir, $"AbstractScriptableObject{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Abstract/Scriptable Object", false, 3)]
         public static void CreateAbstractScriptableObjectScript()
         {
@@ -113,21 +115,21 @@ namespace Tools
         #endregion
 
         #region Class
-        private static string classTemplatePath = Path.Combine(templateDir, $"Class{templateAssetSuffix}");
+        private static readonly string classTemplatePath = Path.Combine(templateDir, $"Class{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Class", false, 4)]
         public static void CreateClassScript()
         {
             CreateScript(classTemplatePath);
         }
 
-        private static string staticClassTemplatePath = Path.Combine(templateDir, $"StaticClass{templateAssetSuffix}");
+        private static readonly string staticClassTemplatePath = Path.Combine(templateDir, $"StaticClass{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Static Class", false, 4)]
         public static void CreateStaticClassScript()
         {
             CreateScript(staticClassTemplatePath);
         }
 
-        private static string abstractClassTemplatePath = Path.Combine(templateDir, $"AbstractClass{templateAssetSuffix}");
+        private static readonly string abstractClassTemplatePath = Path.Combine(templateDir, $"AbstractClass{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Abstract/Class", false, 4)]
         public static void CreateAbstractClassScript()
         {
@@ -138,8 +140,7 @@ namespace Tools
 
         #region Interface
 
-        private static string interfaceTemplatePath = Path.Combine(templateDir, $"Interface{templateAssetSuffix}");
-        private const string menuItem = "";
+        private static readonly string interfaceTemplatePath = Path.Combine(templateDir, $"Interface{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Interface", false, 4)]
         public static void CreateInterfaceScript()
         {
@@ -150,7 +151,7 @@ namespace Tools
         
         #region Enum
 
-        private static string enumTemplatePath = Path.Combine(templateDir, $"Enum{templateAssetSuffix}");
+        private static readonly string enumTemplatePath = Path.Combine(templateDir, $"Enum{templateAssetSuffix}");
         [MenuItem("Assets/Create/Scripts/Enum", false, 4)]
         public static void CreateEnumScript()
         {
@@ -159,6 +160,25 @@ namespace Tools
 
         #endregion
 
+        #region Markdown
+
+        [MenuItem("Assets/Create/Scripts/Markdown", false, 4)]
+        public static void CreateMarkdownScript()
+        {
+            CreateScript(Path.Combine(templateDir, $"Markdown{templateAssetSuffix}"));
+        }
+
+        #endregion
+
+        #region Editor
+
+        [MenuItem("Assets/Create/Scripts/Custom Editor", false, 4)]
+        public static void CreateCustomEditorScript()
+        {
+            CreateScript(Path.Combine(templateDir, $"CustomEditor{templateAssetSuffix}"));
+        }
+
+        #endregion
 
 
         private static string GetSelectedPathOrFallback()
@@ -175,7 +195,28 @@ namespace Tools
 
     }
 
-    class CreateAsset : EndNameEditAction
+    static class CreateAction<T, I> where T : ScriptableObject, IEndActionInit<I>
+    {
+        /// <summary>
+        /// Wraps scriptable object instance creation and init call of end action into single method.
+        /// </summary>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        public static T Retreive(I i)
+        {
+            T so = ScriptableObject.CreateInstance<T>();
+            so.Init(i);
+
+            return so;
+        }
+    }
+
+    interface IEndActionInit<I>
+    {
+        void Init(I i);
+    }
+
+    class EndAssetAction : EndNameEditAction, IEndActionInit<Type>
     {
         private Type type;
 
@@ -200,15 +241,14 @@ namespace Tools
         }
     }
 
-    public class CreateScriptFromTemplateAction : EndNameEditAction
+    public class EndScriptTemplateAction : EndNameEditAction, IEndActionInit<ScriptTemplate>
     {
         private ScriptTemplate scriptTemplate;
         private const string templateNamePlaceholder = "FileName";
-        private const string extension = ".cs";
 
         public void Init(ScriptTemplate template)
         {
-            this.scriptTemplate = template;
+            scriptTemplate = template;
         }
 
         public override void Action(int instanceId, string pathName, string resourceFile)
@@ -221,10 +261,24 @@ namespace Tools
             File.WriteAllText(pathName, code);
             AssetDatabase.Refresh();
 
-            if (string.IsNullOrEmpty(Path.GetExtension(pathName))) pathName += extension;
+            if (string.IsNullOrEmpty(Path.GetExtension(pathName))) pathName += scriptTemplate.Extension;
 
+            #if UNITY_EDITOR
+            // Load the MonoScript asset
             MonoScript asset = AssetDatabase.LoadAssetAtPath<MonoScript>(pathName);
+
+            // Choose your icon
+            Texture2D icon = scriptTemplate.Icon;
+            // Or for TextAsset: EditorGUIUtility.ObjectContent(null, typeof(TextAsset)).image as Texture2D;
+
+            // Set the icon
+            if (asset != null && icon != null)
+                EditorGUIUtility.SetIconForObject(asset, icon);
+
+            // Show in Project window
             ProjectWindowUtil.ShowCreatedAsset(asset);
+            #endif
+
         }
     }
 }

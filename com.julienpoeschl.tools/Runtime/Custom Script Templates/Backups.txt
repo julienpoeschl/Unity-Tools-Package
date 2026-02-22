@@ -74,3 +74,29 @@ public class ClassName : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 }
+
+
+# Markdown
+
+using UnityEditor;
+
+/// <summary>
+/// 
+/// </summary>
+[CustomEditor(typeof(FileName))]
+public class FileName : Editor
+{
+
+    private FileName script;
+
+    void OnEnable()
+    {
+        script = (FileName)target;
+    }
+
+    public override void OnInspectorGUI()
+    {
+	serializedObject.Update();
+	serializedObject.ApplyModifiedProperties();
+    }
+}

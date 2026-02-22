@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: ScriptableObjectTemplate
   m_EditorClassIdentifier: 
   DefaultName: SO.cs
+  extension: .cs
+  iconName: 0
+  icon: {fileID: 0}
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\n[CreateAssetMenu(fileName
     = \"FileName\", menuName = \"FileName/FileName\", order = 0)]\r\npublic class
     FileName : ScriptableObject\r\n{\r\n\r\n\r\n}\r\n"

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: ClassTemplate
   m_EditorClassIdentifier: 
   DefaultName: Class.cs
+  extension: .cs
+  iconName: 0
+  icon: {fileID: 10904, guid: 0000000000000000f000000000000000, type: 0}
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\npublic
     class FileName\r\n{\r\n\r\n    public FileName()\r\n    {\r\n\r\n    }\r\n}\r\n"

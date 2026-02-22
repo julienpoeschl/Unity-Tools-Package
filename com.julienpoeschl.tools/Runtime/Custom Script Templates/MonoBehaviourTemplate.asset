@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: MonoBehaviourTemplate
   m_EditorClassIdentifier: 
   DefaultName: MonoBehaviour.cs
+  extension: .cs
+  iconName: 2
+  icon: {fileID: 0}
   Template: "using UnityEditor;\r\nusing UnityEngine;\r\n\r\n/// <summary>\r\n///
     \r\n/// </summary>\r\npublic class FileName : MonoBehaviour\r\n{\r\n\r\n    void
     Awake()\r\n    {\r\n\r\n    }\r\n}\r\n"
