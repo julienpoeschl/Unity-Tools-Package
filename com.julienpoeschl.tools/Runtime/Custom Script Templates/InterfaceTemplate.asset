@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6297578074575141bba7ec0bd9a26c4, type: 3}
   m_Name: InterfaceTemplate
   m_EditorClassIdentifier: 
-  DefaultName: Interface.cs
+  DefaultName: IInterface.cs
+  extension: .cs
+  iconName: 0
+  icon: {fileID: 0}
   Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\npublic
     interface FileName\r\n{\r\n\r\n\r\n}\r\n"

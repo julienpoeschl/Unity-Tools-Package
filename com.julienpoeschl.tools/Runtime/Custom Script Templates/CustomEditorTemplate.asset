@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6297578074575141bba7ec0bd9a26c4, type: 3}
   m_Name: CustomEditorTemplate
   m_EditorClassIdentifier: 
-  DefaultName: StaticClass.cs
-  Template: "using UnityEngine;\r\n\r\n/// <summary>\r\n/// \r\n/// </summary>\r\npublic
-    static class FileName\r\n{\r\n\r\r\n}\r\n"
+  DefaultName: Editor.cs
+  extension: .cs
+  iconName: 0
+  icon: {fileID: 0}
+  Template: "using UnityEditor;\n\n/// <summary>\n/// \n/// </summary>\n[CustomEditor(typeof(FileName))]\npublic
+    class FileName : Editor\n{\n\n    private FileName script;\n\n    void OnEnable()\n   
+    {\n        script = (FileName)target;\n    }\n\n    public override void OnInspectorGUI()\n   
+    {\n\tserializedObject.Update();\n\tserializedObject.ApplyModifiedProperties();\n   
+    }\n}"

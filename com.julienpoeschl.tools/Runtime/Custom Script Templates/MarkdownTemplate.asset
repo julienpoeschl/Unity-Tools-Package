@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultName: Markdown.md
   extension: .md
-  iconName: 0
+  iconName: 2
   icon: {fileID: 0}
   Template: '# Markdown
 
